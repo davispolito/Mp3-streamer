@@ -24,12 +24,6 @@ class Client:
         self.lock = Lock()
 
 
-
-# TODO: Thread that sends music and lists to the client.  All send() calls
-# should be contained in this function.  Control signals from client_read could
-# be passed to this thread through the associated Client object.  Make sure you
-# use locks or similar synchronization tools to ensure that the two threads play
-# nice with one another!
 def client_write(lock,client):
     #List
     f = open("music/{}".format(songs[0]), "r")
@@ -71,8 +65,6 @@ def client_write(lock,client):
         
 
 
-# TODO: Thread that receives commands from the client.  All recv() calls should
-# be contained in this function.
 def client_read(lock,client):
     while True:
         message = client.conn.recv(SEND_BUFFER)
@@ -109,7 +101,7 @@ def get_mp3s(musicdir):
         if not filename.endswith(".mp3"):
             continue
 
-        # TODO: Store song metadata for future use.  You may also want to build
+        #Store song metadata for future use.  You may also want to build
         # the song list once and send to any clients that need it.
 
         songs.append(filename)
