@@ -10,11 +10,6 @@ import threading
 from time import sleep
 
 
-# The Mad audio library we're using expects to be given a file object, but
-# we're not dealing with files, we're reading audio data over the network.  We
-# use this object to trick it.  All it really wants from the file object is the
-# read() method, so we create this wrapper with a read() method for it to
-# call, and it won't know the difference.
 class mywrapper(object):
     def __init__(self):
         self.mf = None
@@ -27,9 +22,6 @@ class mywrapper(object):
         return result
 
 
-# Receive messages.  If they're responses to info/list, print
-# the results for the user to see.  If they contain song data, the
-# data needs to be added to the wrapper object. 
 def recv_thread_func(wrap, cond_filled, sock):
     while True:
         cond_filled.acquire()
@@ -61,7 +53,6 @@ def recv_thread_func(wrap, cond_filled, sock):
 
 
 
-# If there is song data stored in the wrapper object, play it!
 def play_thread_func(wrap, cond_filled, dev):
     while True:
         cond_filled.acquire()
