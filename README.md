@@ -1,6 +1,6 @@
 
 
-How to run server: 
+How to run server: /r/n
 ```python server.py [port] [musicdir]```
 Example: 
 ```python server.py 3000 music```
